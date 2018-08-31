@@ -12,7 +12,7 @@ class BlogController extends Controller
     public function index()
     {
     	
-    	$posts = Post::latest()->SimplePaginate($this->limit);
+    	$posts = Post::latest()->published()->SimplePaginate($this->limit);
 
     	return view('blog.index', compact('posts'));
     	

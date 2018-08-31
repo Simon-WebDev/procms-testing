@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Post extends Model
 {
     protected $fillable = ['title','body','excerpt'];
+    protected $date = ['published_at'];
 
 
     public function getImageUrlAttribute()
@@ -25,11 +27,16 @@ class Post extends Model
 
     public function getDateAttribute()
     {
-    	return $this->created_at->diffForHumans();
+    	return is_null($this->published_at) ? '' : $this->created_at->diffForHumans();
     }
 
     public function author()
     {
     	return $this->belongsTo('App\User');
+    }
+
+    public function scopePublished($query)
+    {
+    	return $query->where('published_at','<=', Carbon::now());
     }
 }
