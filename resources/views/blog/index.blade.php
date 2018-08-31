@@ -9,14 +9,14 @@
                 <article class="post-item">
                     @if($post->image_url)
                     <div class="post-item-image">
-                        <a href="post.html">
+                        <a href="{{route('blog.show', $post->id)}}">
                             <img src="{{$post->image_url}}" alt="">
                         </a>
                     </div>
                     @endif
                     <div class="post-item-body">
                         <div class="padding-10">
-                            <h2><a href="post.html">{{$post->title}}</a></h2>
+                            <h2><a href="{{route('blog.show', $post->id)}}">{{$post->title}}</a></h2>
                             <p>{{$post->excerpt}}</p>
                         </div>
 
