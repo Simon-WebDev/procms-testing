@@ -18,7 +18,7 @@ class PostsTableSeeder extends Seeder
         //insert posts data
         $posts = [];
         $faker = Factory::create();
-        $date = Carbon::create(2018,8,10,16);
+        $date = Carbon::create(2018,8,21,16);
         $publishedDate = clone($date);
         $createdDate = clone($date);
         
@@ -35,7 +35,9 @@ class PostsTableSeeder extends Seeder
         		'image' => rand(0,1) == 1 ? $image : NULL,
         		'created_at' => $createdDate,
         		'updated_at' => $createdDate,
-                'published_at' => $i < 5 ? $publishedDate : (rand(0,1) == 0 ? NULL : $publishedDate->addDays($i+2)) 
+                'published_at' => $i <= 5 ? $date : (rand(0,1) == 0 ? NULL : $publishedDate->addDays($i)),
+                'category_id' => rand(1,5)
+
         	];
 
 
