@@ -25,6 +25,21 @@ class Post extends Model
         
     	return $imageUrl;
     }
+    public function getImageThumbUrlAttribute()
+    {
+        $imageUrl="";
+        if (! is_null($this->image)) {
+            $ext = substr(strrchr($this->image, '.'), 1);
+            $thumbnail = str_replace(".{$ext}","_thumb.{$ext}", $this->image);
+            $image_path = public_path()."/img/".$thumbnail;
+            if (file_exists($image_path)) {
+                $imageUrl = asset("/img/".$thumbnail);
+
+            }
+        }
+           
+        return $imageUrl;
+    }
 
     public function getDateAttribute()
     {
@@ -54,6 +69,10 @@ class Post extends Model
     public function scopePublished($query)
     {
     	return $query->where('published_at','<=', Carbon::now());
+    }
+    public function scopePopular($query)
+    {
+        return $query->orderBy('view_count','desc');
     }
 
  
