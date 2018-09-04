@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Post;
 use Carbon\Carbon;
+use App\User;
 use Illuminate\Http\Request;
 
 
@@ -41,5 +42,13 @@ class BlogController extends Controller
     	
 
     	return view('blog.index', compact('posts','categoryName'));
+    }
+
+    public function author(User $author)
+    {
+        $authorName = $author->name;
+        $posts = $author->posts()->with('category')->published()->simplePaginate($this->limit);
+        return view('blog.index', compact('posts','authorName'));
+
     }
 }
