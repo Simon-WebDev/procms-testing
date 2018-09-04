@@ -55,4 +55,6 @@ class Post extends Model
     {
     	return $query->where('published_at','<=', Carbon::now());
     }
+
+ 
 }

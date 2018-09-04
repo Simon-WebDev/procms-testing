@@ -15,28 +15,31 @@ class BlogController extends Controller
     {
     	
     	$posts = Post::with('author')->latest()->published()->SimplePaginate($this->limit);
-    	$categories = Category::with('posts')->orderBy('title','asc')->get();
+    	
 
     	
 
-    	return view('blog.index', compact('posts','categories'));
+    	return view('blog.index', compact('posts'));
     	
     }
 
     public function show($slug)
     {
-    	$post = Post::where('slug',$slug)->published()->first();
-    	return view('blog.show', compact('post'));
-    }
-
-    public function category($id)
-    {
-    	$category = Category::findOrFail($id);
-    	$posts = Post::with('author')->latest()->where('category_id',$category->id)->published()->SimplePaginate($this->limit);
     	$categories = Category::with(['posts'=> function($query){
     		$query->published();
     	}])->orderBy('title','asc')->get();
 
-    	return view('blog.index', compact('posts','categories'));
+    	$post = Post::where('slug',$slug)->published()->first();
+    	return view('blog.show', compact('post','categories'));
+    }
+
+    public function category(Category $category)
+    {
+    	$categoryName = $category->title;
+    	//$category = Category::findOrFail($id);
+    	$posts = Post::with('author')->latest()->where('category_id',$category->id)->published()->SimplePaginate($this->limit);
+    	
+
+    	return view('blog.index', compact('posts','categoryName'));
     }
 }
