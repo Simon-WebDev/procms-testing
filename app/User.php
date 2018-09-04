@@ -2,8 +2,9 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -35,5 +36,19 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getBioHtmlAttribute()
+    {
+        return $this->bio ? Markdown::convertToHtml(e($this->bio)) : NULL ;
+    }
+
+    public function gravatar()
+    {
+        $email = $this->email;
+        $default = '';
+        $size = 40;
+        return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+
     }
 }

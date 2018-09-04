@@ -35,7 +35,7 @@
                     <div class="media">
                       <div class="media-left">
                         <a href="#">
-                          <img alt="Author 1" src="{{asset('img/author.jpg')}}" class="media-object">
+                          <img alt="{{$post->author->name}}" src="{{$post->author->gravatar()}}" class="media-object">
                         </a>
                       </div>
                       <div class="media-body">
@@ -44,12 +44,12 @@
                           <a href="{{route('author',$post->author->slug)}}">
                               <i class="fa fa-clone"></i>
                               @php
-                                $postCount = $post->author->posts()->count();
+                                $postCount = $post->author->posts()->published()->count();
                               @endphp
-                              {{$post->author->posts()->count()}}  {{str_plural('post',$postCount)}}
+                              {{$post->author->posts()->published()->count()}}  {{str_plural('post',$postCount)}}
                           </a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad aut sunt cum, mollitia excepturi neque sint magnam minus aliquam, voluptatem, labore quis praesentium eum quae dolorum temporibus consequuntur! Non.</p>
+                        {!! $post->author->bio_html !!}
                       </div>
                     </div>
                 </article>
