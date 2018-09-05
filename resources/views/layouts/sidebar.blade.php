@@ -17,6 +17,7 @@
             </div>
             <div class="widget-body">
                 <ul class="categories">
+                    
                     @foreach($categories as $category)
                     <li>
                         <a href="{{route('category', $category->slug)}}"><i class="fa fa-angle-right"></i> {{$category->title}}</a>
@@ -33,6 +34,7 @@
             </div>
             <div class="widget-body">
                 <ul class="popular-posts">
+
                     @foreach($popularPosts as $post)
                     <li>
                         @if($post->image_thumb_url)

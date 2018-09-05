@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['title','body','excerpt', 'category_id'];
+    protected $fillable = ['title','body','excerpt', 'category_id','view_count','image', 'slug'];
     protected $date = ['published_at'];
 
 
