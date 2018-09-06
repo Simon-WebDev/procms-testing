@@ -38,3 +38,19 @@ Route::get('mytest', function(){
 	dd(App\Post::get());
 
 });
+
+Auth::routes();
+
+Route::get('/home', 'Backend\HomeController@index')->name('home');
+
+
+Route::name('backend.')->group(function(){
+	Route::resource('backend/blog', 'Backend\BlogController'); 
+});
+	
+
+
+
+	
+
+

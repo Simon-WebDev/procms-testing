@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $fillable = ['title','body','excerpt', 'category_id','view_count','image', 'slug'];
-    protected $date = ['published_at'];
+    protected $dates = ['published_at'];
 
 
     public function getImageUrlAttribute()
@@ -73,6 +73,28 @@ class Post extends Model
     public function scopePopular($query)
     {
         return $query->orderBy('view_count','desc');
+    }
+
+    public function dateFormatted($showTimes = false)
+    {
+        $format = "Y/m/d";
+        if($showTimes) $format = $format . " H:i:s";
+        return $this->created_at->format($format);
+    }
+
+    public function publicationLabel()
+    {
+
+        if ( ! $this->published_at) {
+            return "<span class='label label-warning'>Draft</span>";
+        }
+        elseif ($this->published_at && $this->published_at->isFuture()) {
+            return "<span class='label label-info'>Schedule</span>";
+        }
+        else {
+
+            return "<span class='label label-success'>Published</span>";
+        }
     }
 
  
