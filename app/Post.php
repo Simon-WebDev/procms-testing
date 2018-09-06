@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['title','body','excerpt', 'category_id','view_count','image', 'slug'];
+    protected $fillable = ['title','body','excerpt', 'category_id','view_count','image', 'slug','published_at'];
     protected $dates = ['published_at'];
 
 
@@ -54,6 +54,12 @@ class Post extends Model
     public function getExcerptHtmlAttribute()
     {
     	return $this->excerpt ? Markdown::convertToHtml(e($this->excerpt)) : NULL ;
+    }
+
+    public function setPublishedAtAttribute($value)
+    {
+        $this->attributes['published_at'] = is_null($value) ? NULL : $value;
+
     }
 
     public function author()
