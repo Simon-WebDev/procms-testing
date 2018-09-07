@@ -17,6 +17,11 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('backend/css/skins/_all-skins.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('backend/plugins/simplemde/simplemde.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('backend/plugins/bootstrapdatetimepicker/css/bootstrap-datetimepicker.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('backend/plugins/jasny-bootstrap/css/jasny-bootstrap.min.css')}}">
+  
+  <link rel="stylesheet" type="text/css" href="{{asset('backend/css/custom.css')}}">
   <!-- bootstrap wysihtml5 - text editor -->
   <!-- <link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
  -->
@@ -50,6 +55,18 @@
 <script src="{{asset('backend/js/bootstrap.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('backend/js/app.min.js')}}"></script>
+<script src="{{asset('backend/plugins/simplemde/simplemde.min.js')}}"></script>
+
+<script src="{{asset('backend/plugins/moment/moment.min.js')}}"></script>
+<script src="{{asset('backend/plugins/moment/ko.js')}}"></script>
+
+
+<script src="{{asset('backend/plugins/bootstrapdatetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
+<script src="{{asset('backend/plugins/jasny-bootstrap/js/jasny-bootstrap.min.js')}}"></script>
+
+
+
+
 
 @yield('script')
 </body>
