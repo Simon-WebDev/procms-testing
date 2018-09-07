@@ -180,6 +180,7 @@ return [
         App\Providers\ComposerServiceProvider::class,
 
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -233,6 +234,7 @@ return [
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
