@@ -29,7 +29,8 @@
                     @endif
                     {!! Form::model($post, [
                       'route' => 'backend.blog.store',
-                      'method' => 'POST'
+                      'method' => 'POST',
+                      'files'  => TRUE
                     ]) !!}
                     <div class="form-group {{$errors->has('title') ? 'has-error' : ''}}">
                       {!! Form::label('title') !!}
@@ -68,6 +69,13 @@
                       {!! Form::select('category_id',App\Category::pluck('title','id'),null, ['class'=>'form-control','placeholder'=>'카테고리 선택'])!!}
                       @if($errors->has('category_id'))
                       <span class="help-block">{{$errors->first('category_id')}}</span>
+                      @endif
+                    </div>
+                    <div class="form-group {{$errors->has('image') ? 'has-error' : ''}}">
+                      {!! Form::label('image','파일 업로드') !!}
+                      {!! Form::file('image')!!}
+                      @if($errors->has('image'))
+                      <span class="help-block">{{$errors->first('image')}}</span>
                       @endif
                     </div>
                     <hr>

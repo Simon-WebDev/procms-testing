@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 class BlogController extends BackendController
 {
     private $limit = 5;
+    private $uploadPath;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->uploadPath = public_path('img');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -40,10 +47,25 @@ class BlogController extends BackendController
      */
     public function store(PostRequest $request)
     {
+        $data = $this->handleRequest($request);
         
-        
-        $request->user()->posts()->create($request->all());
+        $request->user()->posts()->create($data);
         return redirect('backend/blog/')->with('message','새 블로그 글을 작성하셨습니다.');
+    }
+
+    public function handleRequest($request)
+    {
+        $data = $request->all();
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileName = str_random(6).time().'.'.$image->getClientOriginalExtension();
+            $destination = $this->uploadPath;
+
+            $image->move($destination, $fileName);
+
+            $data['image'] = $fileName;
+        }
+        return $data;
     }
 
     /**
