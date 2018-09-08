@@ -26,8 +26,16 @@
                 <a href="{{route('backend.blog.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> Add New</a>
               </div>
               <div class="pull-right" style="padding: 10px;">
-                <a href="?status=all">All</a> |
-                <a href="?status=trash">Trash</a>
+                @php $links = []; @endphp
+                @foreach($statusList as $key => $value)
+                  @if($value)
+                    @php  
+                    $selected = Request::get('status') == $key ? 'selected-status' : '';
+                    $links[] = "<a class=\"{$selected}\" href=\"?status={$key}\">".ucwords($key)."({$value})</a>" ; 
+                    @endphp
+                  @endif
+                @endforeach
+                {!! implode(' | ', $links) !!}
               </div>
           	</div>
             <!-- /.box-header -->
@@ -48,7 +56,7 @@
             <!-- /.box-body -->
             <div class="box-footer clearfix">
             	<div class="pull-left">
-            		{{$posts->links()}}
+            		{{$posts->appends(Request::query())->links()}}
             	</div>
             	<div class="pull-right">
             		

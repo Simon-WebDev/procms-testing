@@ -78,15 +78,25 @@ class Post extends Model
     	return $this->belongsTo('App\Category');
     }
 
+    
     public function scopePublished($query)
     {
-    	return $query->where('published_at','<=', Carbon::now());
+        return $query->where('published_at','<=', Carbon::now());
+    }
+    public function scopeScheduled($query)
+    {
+        return $query->where('published_at','>', Carbon::now());
+    }
+    public function scopeDraft($query)
+    {
+        return $query->whereNull('published_at');
     }
     public function scopePopular($query)
     {
         return $query->orderBy('view_count','desc');
     }
 
+    
     public function dateFormatted($showTimes = false)
     {
         $format = "Y/m/d";
