@@ -5,11 +5,15 @@ namespace App;
 use Carbon\Carbon;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Post extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = ['title','body','excerpt', 'category_id','view_count','image', 'slug','published_at'];
-    protected $dates = ['published_at'];
+    protected $dates = ['published_at','deleted_at'];
 
 
     public function getImageUrlAttribute()

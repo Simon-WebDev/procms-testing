@@ -126,6 +126,15 @@ class BlogController extends BackendController
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id)->delete();
+        return redirect('backend/blog')->with('trash-message',['임시삭제 되었습니다.',$id]);
+    }
+
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->findOrFail($id);
+        $post->restore();
+
+        return redirect('backend/blog')->with('message','글이 임시삭제에서 정상적으로 복원되었습니다.');
     }
 }

@@ -1,11 +1,6 @@
 <div class="col-xs-9">
   <div class="box">
     <div class="box-body ">
-            @if(session('message'))
-              <div class="alert alert-info">
-                {{session('message')}}
-              </div>
-            @endif
            
             <div class="form-group {{$errors->has('title') ? 'has-error' : ''}}">
               {!! Form::label('title') !!}
