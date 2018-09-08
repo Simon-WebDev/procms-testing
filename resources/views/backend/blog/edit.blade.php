@@ -1,5 +1,5 @@
 @extends('layouts.backend.main')
-@section('title', 'MyBlog | Blog create')
+@section('title', 'MyBlog | Edit Post')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="min-height: 323px;">
@@ -7,12 +7,12 @@
   <section class="content-header">
     <h1>
       Blog
-      <small>Add New Post</small>
+      <small>Edit Post</small>
     </h1>
     <ol class="breadcrumb">
       <li class="active"><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Dashboard</li></a>
       <li><a href="{{route('backend.blog.index')}}">Blog</a></li>
-      <li class="active">New Post</li>
+      <li class="active">Edit Post</li>
     </ol>
   </section>
 
@@ -20,8 +20,8 @@
   <section class="content">
       <div class="row">
         {!! Form::model($post, [
-          'route' => 'backend.blog.store',
-          'method' => 'POST',
+          'route' => ['backend.blog.update',$post->id],
+          'method' => 'PUT',
           'files'  => TRUE,
           'id' =>'post-form'
         ]) !!}

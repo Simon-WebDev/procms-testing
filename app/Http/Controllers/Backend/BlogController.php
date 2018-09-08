@@ -99,7 +99,8 @@ class BlogController extends BackendController
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('backend.blog.edit', compact('post'));
     }
 
     /**
@@ -109,9 +110,12 @@ class BlogController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $data = $this->handleRequest($request);
+        $post->update($data);
+        return redirect('backend/blog/')->with('message','블로그 글을 수정하셨습니다.');
     }
 
     /**
