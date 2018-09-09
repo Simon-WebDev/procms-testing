@@ -1,7 +1,7 @@
 <table class="table table-bordered">
 	<thead>
 		<tr>
-			<th width="80">Auction</th>
+			<th width="80">Action</th>
 			<th>Title</th>
 			<th width="120">Author</th>
 			<th width="150">Category</th>

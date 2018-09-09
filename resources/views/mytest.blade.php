@@ -1,3 +1,4 @@
+
 @php
 //php list function
 $info = array('coffee', 'brown', 'caffeine');
@@ -9,4 +10,10 @@ echo "<hr>";
 var_dump($info);
 
 //echo "$drink is $color and $power makes it special.\n";
+
+
 @endphp
+
+<hr>
+
+
