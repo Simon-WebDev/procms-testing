@@ -14,6 +14,7 @@ class PostsTableSeeder extends Seeder
     public function run()
     {
         //reset posts table
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('posts')->truncate();
         //insert posts data
         $posts = [];

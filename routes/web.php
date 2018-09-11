@@ -57,8 +57,10 @@ Route::name('backend.')->group(function(){
 		'as' =>'users.confirm'
 	]);
 	Route::resource('backend/users','Backend\UsersController');
-
 });
+
+Route::get('edit-account','Backend\HomeController@edit')->name('edit-account');
+Route::put('edit-account','Backend\HomeController@update');
 
 
 

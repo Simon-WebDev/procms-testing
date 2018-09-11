@@ -32,14 +32,14 @@
               <img src="{{$currentUser->gravatar()}}" class="img-circle" alt="{{$currentUser->name}}">
 
               <p>
-                {{$currentUser->name}} - Web Developer
+                {{$currentUser->name}} - {{$currentUser->roles->first()->display_name}}
                 <small>Member since {{-- {{$currentUser->created_at --}}2018<small>
               </p>
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                <a href="{{url('edit-account')}}" class="btn btn-default btn-flat">프로필</a>
               </div>
               <div class="pull-right">
                 {{-- <a href="#" class="btn btn-default btn-flat">Sign out</a> --}}
