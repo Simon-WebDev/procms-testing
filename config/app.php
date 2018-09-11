@@ -184,6 +184,8 @@ return [
 
         Laratrust\LaratrustServiceProvider::class,
 
+        Barryvdh\Debugbar\ServiceProvider::class,
+
     ],
 
     /*
@@ -238,6 +240,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Laratrust'   => Laratrust\LaratrustFacade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

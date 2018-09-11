@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
-use Carbon\Carbon;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class BlogController extends Controller
@@ -15,13 +16,13 @@ class BlogController extends Controller
     public function index()
     {
     	
-    	$posts = Post::with('author')->latest()->published()->SimplePaginate($this->limit);
-    	
+    	$posts = Post::with('author')
+                        ->latest()
+                        ->published()
+                        ->filter(request('term'))
+                        ->simplePaginate($this->limit);
 
-    	
-
-    	return view('blog.index', compact('posts'));
-    	
+    	return view('blog.index', compact('posts')); 
     }
 
     public function show($slug)
