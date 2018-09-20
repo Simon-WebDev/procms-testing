@@ -18,5 +18,6 @@ class BackendController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('check-permissions');
+        // $this->middleware('role:admin|editor|author');
     }
 }

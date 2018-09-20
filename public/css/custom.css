@@ -333,3 +333,12 @@ ul.social-icons li {
 span.required {
     color: red;
 }
+
+
+
+/*backend*/
+/* sidebar link font size */
+.main-sidebar .sidebar li a
+{
+    font-size: 14px;
+}

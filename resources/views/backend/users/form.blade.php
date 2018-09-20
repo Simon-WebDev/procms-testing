@@ -56,7 +56,7 @@
             @endif
         </div>
        
-        <div class="form-group {{ $errors->has('bio') ? 'has-error' : '' }}">
+        <div class="form-group">
             {!! Form::label('bio') !!}
             {!! Form::textarea('bio', null, ['class' => 'form-control','rows'=>6]) !!}
 

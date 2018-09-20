@@ -4,12 +4,16 @@ namespace App\Views\Composers;
 use Illuminate\View\View;
 use App\Category;
 use App\Post;
+use App\Tag; 
 
 class NavigationComposer
 {
 	public function compose(View $view)
 	{
 		$this->composeCategories($view);
+
+		$this->composeTags($view);
+
 		$this->composePopularPosts($view);
 	}
 
@@ -25,5 +29,12 @@ class NavigationComposer
 	{
 		    $popularPosts  = Post::published()->popular()->take(3)->get();
 		    $view->with('popularPosts',$popularPosts);
+	}
+
+	public function composeTags(View $view)
+	{
+		//has method 사이드바의 tag중 포스트가 없는 태그를 안보여주게 한다.
+		$tags = Tag::has('posts')->get();
+		$view->with('tags',$tags);
 	}
 }

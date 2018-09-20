@@ -62,6 +62,15 @@ class Post extends Model
     	return $this->excerpt ? Markdown::convertToHtml(e($this->excerpt)) : NULL ;
     }
 
+    public function getTagsHtmlAttribute()
+    {
+        $anchors=[];
+        foreach($this->tags as $tag){
+        $anchors[] = '<a href="'. route('tag',$tag->slug).'">'.$tag->name. '</a>';
+        }
+        return implode(", ", $anchors);
+    }
+
     public function setPublishedAtAttribute($value)
     {
         $this->attributes['published_at'] = is_null($value) ? NULL : $value;
@@ -76,6 +85,11 @@ class Post extends Model
     public function category()
     {
     	return $this->belongsTo('App\Category');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
     }
 
     

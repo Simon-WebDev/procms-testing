@@ -3,6 +3,11 @@
         <p>카테고리: <strong>{{$categoryName}}</strong></p>
     </div>
 @endif
+@if(isset($tagName))
+    <div class="alert alert-info">
+        <p>태그: <strong>{{$tagName}}</strong></p>
+    </div>
+@endif
 @if(isset($authorName))
     <div class="alert alert-info">
         <p>작성자: <strong>{{$authorName}}</strong></p>
