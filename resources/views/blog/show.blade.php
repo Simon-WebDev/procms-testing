@@ -63,4 +63,16 @@
 @endsection
 
 
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        //change pagination link icon
+        $('.pagination>li:first a').html('<i class="fa fa-chevron-left"></i>');
+        $('.pagination>li:first span').html('<i class="fa fa-chevron-left"></i>');
+        $('.pagination>li:last a').html('<i class="fa fa-chevron-right"></i>');
+        $('.pagination>li:last span').html('<i class="fa fa-chevron-right"></i>');
+    });
+</script>
+@endsection
+
   
