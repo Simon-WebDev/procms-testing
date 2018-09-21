@@ -23,7 +23,7 @@
                                     <li><i class="fa fa-clock-o"></i><time> {{$post->created_at->diffForHumans()}}</time></li>
                                     <li><i class="fa fa-tags"></i><a href="{{route('category',$post->category->slug)}}"> {{$post->category->title}}</a></li>
                                     <li><i class="fa fa-tag"></i>{!! $post->tags_html !!}</li>
-                                    <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
+                                    <li><i class="fa fa-comments"></i><a href="#post-comments">{{$post->commentsNumber('Comment')}}</a></li>
                                 </ul>
                             </div>
                             {!! $post->body_html !!}

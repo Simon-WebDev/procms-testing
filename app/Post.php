@@ -97,6 +97,12 @@ class Post extends Model
         return $this->hasMany('App\Comment');
     }
 
+    public function commentsNumber($label='Comment')
+    {
+        $commentsNumber = $this->comments->count();
+        return $commentsNumber. " ".str_plural($label,$commentsNumber);
+    }
+
     
     public function scopePublished($query)
     {
