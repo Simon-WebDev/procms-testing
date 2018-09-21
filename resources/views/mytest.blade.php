@@ -11,9 +11,10 @@ var_dump($info);
 
 //echo "$drink is $color and $power makes it special.\n";
 
-
 @endphp
 
 <hr>
+<hr>
+{{Carbon\Carbon::now()->modify('-1 year')}}
 
 

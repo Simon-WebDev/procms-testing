@@ -43,12 +43,22 @@
                 @endforeach
                 
 
-                <nav>
-                  {!! $posts->appends(request()->only(['term']))->links()  !!}
+                <nav class="text-center">
+                  {!! $posts->appends(request()->only(['term', 'month', 'year']))->links()  !!}
                 </nav>
             </div>
             @include('layouts.sidebar')
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        //change pagination link icon
+        $('.pagination>li:first a').html('<i class="fa fa-chevron-left"></i>');
+        $('.pagination>li:last a').html('<i class="fa fa-chevron-right"></i>');
+    });
+</script>
 @endsection

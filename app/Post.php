@@ -92,6 +92,11 @@ class Post extends Model
         return $this->belongsToMany('App\Tag');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
     
     public function scopePublished($query)
     {
@@ -133,23 +138,39 @@ class Post extends Model
         }
     }
 
-    public function scopeFilter($query, $term)
+    public function scopeFilter($query, $filter)
     { 
-        //check if any "term" search entered
-        if ($term) {
-            $query->where(function($q) use($term){
-                // deopend on developer descision
-                
-                // $q->whereHas('author', function($qr) use ($term){
+        if (isset($filter['month']) && $month = $filter['month']) {
+            $query->whereRaw('month(published_at) = ?', [Carbon::parse($month)->month]);
+        }
+
+        if (isset($filter['year']) && $year = $filter['year']) {
+            $query->whereRaw('year(published_at) = ?', [$year]);
+        }
+
+        // check if any term entered
+        if (isset($filter['term']) && $term = $filter['term'])
+        {
+            $query->where(function($q) use ($term) {
+                // $q->whereHas('author', function($qr) use ($term) {
                 //     $qr->where('name', 'LIKE', "%{$term}%");
                 // });
-                // $q->orWhereHas('category', function($qr) use ($term){
+                // $q->orWhereHas('category', function($qr) use ($term) {
                 //     $qr->where('title', 'LIKE', "%{$term}%");
                 // });
                 $q->orWhere('title', 'LIKE', "%{$term}%");
                 $q->orWhere('excerpt', 'LIKE', "%{$term}%");
             });
-        }        
+        }      
+    }
+
+    public static function archives()
+    {
+        return static::selectRaw('count(id) as post_count, year(published_at) year, monthname(published_at) month')
+                        ->published()
+                        ->groupBy('year', 'month')
+                        ->orderByRaw('min(published_at) desc')
+                        ->get();
     }
 
  

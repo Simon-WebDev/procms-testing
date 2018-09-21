@@ -15,6 +15,8 @@ class NavigationComposer
 		$this->composeTags($view);
 
 		$this->composePopularPosts($view);
+
+		$this->composeArchives($view);
 	}
 
 	private function composeCategories(View $view)
@@ -31,10 +33,17 @@ class NavigationComposer
 		    $view->with('popularPosts',$popularPosts);
 	}
 
-	public function composeTags(View $view)
+	private function composeTags(View $view)
 	{
 		//has method 사이드바의 tag중 포스트가 없는 태그를 안보여주게 한다.
 		$tags = Tag::has('posts')->get();
 		$view->with('tags',$tags);
+	}
+
+	private function composeArchives(View $view)
+	{
+	    $archives = Post::archives();
+
+	    $view->with('archives', $archives);
 	}
 }

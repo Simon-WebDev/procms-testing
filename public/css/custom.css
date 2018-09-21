@@ -340,5 +340,5 @@ span.required {
 /* sidebar link font size */
 .main-sidebar .sidebar li a
 {
-    font-size: 14px;
+    font-size: 14px !important;
 }

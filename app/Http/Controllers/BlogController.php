@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
-	protected $limit = 3;
+	protected $limit = 5;
     public function index()
     {
     	
     	$posts = Post::with('author','tags','category')
                         ->latest()
                         ->published()
-                        ->filter(request('term'))
+                        ->filter(request()->only(['term', 'month', 'year']))
                         ->simplePaginate($this->limit);
 
     	return view('blog.index', compact('posts')); 

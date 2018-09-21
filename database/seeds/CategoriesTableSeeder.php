@@ -1,5 +1,7 @@
 <?php
 
+use App\Category;
+use App\Post;
 use Illuminate\Database\Seeder;
 
 class CategoriesTableSeeder extends Seeder
@@ -15,26 +17,29 @@ class CategoriesTableSeeder extends Seeder
 
         DB::table('categories')->insert([
         	[
-        		'title' => 'Web Development',
-        		'slug' => 'web-development'
+        		'title' => 'Uncategoriezed',
+        		'slug' => 'uncategorized'
         	],
         	[
-        		'title' => 'Social Marketing',
-        		'slug' => 'social-marketing'
+        		'title' => 'Tips and Tricks',
+        		'slug' => 'tips-and-tricks'
         	],
         	[
-        		'title' => 'General',
-        		'slug' => 'general'
+        		'title' => 'Build Apps',
+        		'slug' => 'build-apps'
         	],
         	[
-        		'title' => 'DIY',
-        		'slug' => 'diy'
+        		'title' => 'News',
+        		'slug' => 'news'
         	],
         	[
-        		'title' => 'Facebook Development',
-        		'slug' => 'facebook-development'
+        		'title' => 'Freebies',
+        		'slug' => 'freebies'
         	]
         ]);
+
+        
+        
 
        
     }
