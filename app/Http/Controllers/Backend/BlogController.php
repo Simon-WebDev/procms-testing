@@ -99,7 +99,8 @@ class BlogController extends BackendController
     {
         $data = $this->handleRequest($request);
         
-        $request->user()->posts()->create($data);
+        $newPost = $request->user()->posts()->create($data);
+        $newPost->createTags($data["post_tags"]);
         return redirect('backend/blog/')->with('message','새 블로그 글을 작성하셨습니다.');
     }
 
@@ -165,6 +166,7 @@ class BlogController extends BackendController
         $oldImage = $post->image;
         $data = $this->handleRequest($request);
         $post->update($data);
+        $post->createTags($data['post_tags']);
         if ($oldImage !== $post->image) {
             $this->removeImage($oldImage);
         }

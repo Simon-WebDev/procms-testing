@@ -1,4 +1,24 @@
+@section('style')
+    <link rel="stylesheet" href="/backend/plugins/tag-editor/jquery.tag-editor.css">
+@endsection
+
 @section('script')
+{{-- post tag-editor(https://github.com/Pixabay/jQuery-tagEditor)
+ --}}
+<script src="/backend/plugins/tag-editor/jquery.caret.min.js"></script>
+<script src="/backend/plugins/tag-editor/jquery.tag-editor.min.js"></script>
+<script type="text/javascript">
+  var options = {};
+
+  @if($post->exists)
+      options = {
+          initialTags: {!! $post->tags_list !!},
+      };
+  @endif
+
+  $('input[name=post_tags]').tagEditor(options);
+
+</script>
 <script>
 	$('ul.pagination').addClass('no-margin pagination-sm');
   //make slug title the same automatically
@@ -27,6 +47,8 @@
     $('#published_at').val("");
     $('#post-form').submit();
   });
+
+  
 
 </script>
 @endsection

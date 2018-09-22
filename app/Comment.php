@@ -9,9 +9,10 @@ class Comment extends Model
 {
     protected $fillable =[
     	'author_name',
-    	'author_emial',
+    	'author_email',
     	'author_url',
-    	'body'
+    	'body',
+    	'post_id'
     ];
 
     public function post()
@@ -28,4 +29,7 @@ class Comment extends Model
     {
     	return Markdown::convertToHtml(e($this->body));
     }
+  
+
+    
 }

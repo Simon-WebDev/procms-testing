@@ -338,7 +338,12 @@ span.required {
 
 /*backend*/
 /* sidebar link font size */
-.main-sidebar .sidebar li a
+
+.main-sidebar .sidebar>li>a
 {
-    font-size: 14px !important;
+    font-size: 16px !important;
+}
+.main-sidebar .sidebar-menu > li > a
+{
+    font-size: 16px !important;
 }
