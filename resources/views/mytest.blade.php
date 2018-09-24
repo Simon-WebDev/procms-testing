@@ -17,4 +17,3 @@ var_dump($info);
 <hr>
 {{Carbon\Carbon::now()->modify('-1 year')}}
 
-

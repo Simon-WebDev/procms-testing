@@ -69,6 +69,7 @@
 
 
 
+
 @yield('script')
 </body>
 </html>

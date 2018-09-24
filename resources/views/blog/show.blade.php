@@ -26,7 +26,8 @@
                                     <li><i class="fa fa-comments"></i><a href="#post-comments">{{$post->commentsNumber('Comment')}}</a></li>
                                 </ul>
                             </div>
-                            {!! $post->body_html !!}
+                            {!! $post->body !!}
+                           {{-- create시 tinymce를 쓰지 않고 simplemde를 쓴경우.  {!! $post->body_html !!} --}}
                            
                         </div>
                     </div>

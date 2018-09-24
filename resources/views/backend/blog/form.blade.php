@@ -18,11 +18,11 @@
             </div>
             <div class="form-group  excerpt">
               {!! Form::label('excerpt') !!}
-              {!! Form::textarea('excerpt', null, ['class'=>'form-control'])!!}
+              {!! Form::textarea('excerpt', null, ['class'=>'form-control','rows'=>4])!!}
             </div>
             <div class="form-group {{$errors->has('body') ? 'has-error' : ''}}  body">
               {!! Form::label('body') !!}
-              {!! Form::textarea('body', null, ['class'=>'form-control'])!!}
+              {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>30])!!}
               @if($errors->has('body'))
               <span class="help-block">{{$errors->first('body')}}</span>
               @endif

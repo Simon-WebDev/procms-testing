@@ -38,6 +38,7 @@
       @if(check_user_permissions(request(), "Users@index"))
       <li><a href="{{route('backend.users.index')}}"><i class="fa fa-users"></i> <span>Users</span></a></li>
       @endif
+      <li><a href="{{route('backend.media.index')}}"><i class="fa fa-image"></i> Media</a></li>
     </ul>
   </section>
   <!-- /.sidebar -->

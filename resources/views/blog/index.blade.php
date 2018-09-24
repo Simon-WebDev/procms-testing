@@ -20,7 +20,11 @@
                     <div class="post-item-body">
                         <div class="padding-10">
                             <h2><a href="{{route('blog.show', $post->slug)}}">{{$post->title}}</a></h2>
-                            <p>{!!  $post->excerpt_html !!}</p>
+                            <div>
+                                {!! $post->excerpt !!}
+                                {{--create시 tinymce를 쓰지 않는경우 Markdown사용. {!!  $post->excerpt_html !!} --}}
+                                
+                            </div>
                         </div>
 
                         <div class="post-meta padding-10 clearfix">

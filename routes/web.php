@@ -66,6 +66,11 @@ Route::name('backend.')->group(function(){
 		'as' =>'users.confirm'
 	]);
 	Route::resource('backend/users','Backend\UsersController');
+	//laravel file manager
+	Route::get('backend/media',[
+		'uses'=> 'Backend\MediaController@index',
+		'as'  =>'media.index'
+	]);
 });
 
 Route::get('edit-account','Backend\HomeController@edit')->name('edit-account');
