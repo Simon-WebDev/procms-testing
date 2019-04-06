@@ -14,6 +14,10 @@ class CommentsTableSeeder extends Seeder
      */
     public function run()
     {
+        //table reset
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        DB::table('comments')->truncate();
+        
         $faker = Factory::create();
         $comments = [];
         $posts = Post::published()->latest()->take(5)->get();
@@ -25,9 +29,9 @@ class CommentsTableSeeder extends Seeder
         		$comments[] = [
         			'author_name' => $faker->name,
         			'author_email' => $faker->email,
-        			'author_url' => $faker->domainName,
         			'body'       => $faker->paragraphs(rand(1,5), true),
         			'post_id'    => $post->id,
+                    'is_active'  => rand(0,1),
         			'created_at' => $commentDate,
         			'updated_at' => $commentDate,
 
@@ -35,7 +39,7 @@ class CommentsTableSeeder extends Seeder
         	}
 
         }
-        Comment::truncate();
+        // Comment::truncate();
         Comment::insert($comments);
     }
 }

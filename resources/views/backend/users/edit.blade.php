@@ -1,18 +1,18 @@
 @extends('layouts.backend.main')
-@section('title', 'MyBlog | Edit User')
+@section('title')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="min-height: 323px;">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      User
-      <small>Edit User</small>
+      <i class="fa fa-users"></i> 회원정보
+      <small>수정</small>
     </h1>
     <ol class="breadcrumb">
-      <li class="active"><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Dashboard</li></a>
-      <li><a href="{{route('backend.users.index')}}">Users</a></li>
-      <li class="active">Edit User</li>
+      <li class="active"><a href="{{route('backend.home')}}"><i class="fa fa-dashboard"></i> Dashboard</li></a>
+      <li><a href="{{route('backend.users.index')}}"><i class="fa fa-users"></i>회원관리</a></li>
+      <li class="active">회원정보수정</li>
     </ol>
   </section>
 
@@ -36,5 +36,5 @@
 </div>
 <!-- /.content-wrapper -->
 @endsection
-@include('backend.users.script')
+
 

@@ -24,9 +24,9 @@ class PostsTableSeeder extends Seeder
         $categories = Category::pluck('id');
         
 
-        for ($i=1; $i <= 36; $i++) {  
+        for ($i=1; $i <= 3000; $i++) {  
         	$image= "Post_Image_" . rand(1,5) . ".jpg";
-        	$date->addDays(10);
+        	//$date->addDay();
             $publishedDate = clone($date);
             $createdDate = clone($date);
 
@@ -39,8 +39,8 @@ class PostsTableSeeder extends Seeder
         		'image' => rand(0,1) == 1 ? $image : NULL,
         		'created_at' => $createdDate,
         		'updated_at' => $createdDate,
-                'published_at' => $i < 30 ? $publishedDate : ( rand(0, 1) == 0 ? NULL : $publishedDate->addDays(4) ),
-                'category_id' => rand(1,$categories->count()),
+                'published_at' => $i < 3000 ? $publishedDate : ( rand(0, 1) == 0 ? NULL : $publishedDate->addDay() ),
+                'category_id' => rand(1,5),
                 'view_count' => rand(1,10)*10
 
         	];

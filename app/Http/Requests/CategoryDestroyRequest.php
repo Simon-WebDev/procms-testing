@@ -16,6 +16,11 @@ class CategoryDestroyRequest extends FormRequest
         return  !($this->route('category') == config('cms.default_category_id'));
     }
 
+    public function forbiddenResponse()
+    {
+        return redirect()->back()->with('error-message','기본카테고리는 삭제할 수 없습니다');
+    }
+
    
 
     /**

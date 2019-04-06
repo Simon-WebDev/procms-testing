@@ -16,33 +16,40 @@ class BlogController extends Controller
 	protected $limit = 5;
     public function index()
     {
-    	
     	$posts = Post::with('author','tags','category','comments')
-                        ->latest()
                         ->published()
                         ->filter(request()->only(['term', 'month', 'year']))
+                        ->orderBy('published_at','desc')
                         ->simplePaginate($this->limit);
 
     	return view('blog.index', compact('posts')); 
     }
 
+   
+
     public function show($slug)
     {
-        
 
     	$categories = Category::with(['posts'=> function($query){
     		$query->published();
     	}])->orderBy('title','asc')->get();
 
     	$post = Post::where('slug',$slug)->published()->first();
+
+        $next_id = Post::published()->where('id','>',$post->id)->min('id');
+        $prev_id = Post::published()->where('id','<',$post->id)->max('id');
+        $next_post = Post::find($next_id);
+        $prev_post = Post::find($prev_id);
+
         //set view_count method 1
         // $viewCount = $post->view_count+1;
         // $post->update(['view_count' => $viewCount]);
         //set view_count method2
         $post->increment('view_count');
         //end view_count method2
-        $postComments = $post->comments()->simplePaginate(3);
-    	return view('blog.show', compact('post','categories','postComments'));
+
+        $postComments = $post->comments()->where('is_active',1)->simplePaginate(3);
+    	return view('blog.show', compact('post','categories','postComments','next_post','prev_post'));
     }
 
     public function category(Category $category)
@@ -54,6 +61,7 @@ class BlogController extends Controller
 
     	return view('blog.index', compact('posts','categoryName'));
     }
+
     public function tag(Tag $tag)
     {
         $tagName = $tag->name;
@@ -62,7 +70,7 @@ class BlogController extends Controller
         
         return view('blog.index', compact('posts','tagName'));
     }
-
+    
     public function author(User $author)
     {
         $authorName = $author->name;
@@ -70,4 +78,5 @@ class BlogController extends Controller
         return view('blog.index', compact('posts','authorName'));
 
     }
+   
 }

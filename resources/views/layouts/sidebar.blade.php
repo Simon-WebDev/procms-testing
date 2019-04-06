@@ -1,9 +1,9 @@
-<div class="col-md-4">
+<div class="col-md-3">
     <aside class="right-sidebar">
         <div class="search-widget">
             <form action="{{route('blog')}}">
                 <div class="input-group">
-                  <input type="text" class="form-control input-lg" name="term" value="{{request('term')}}" placeholder="Search for...">
+                  <input type="text" class="form-control input-lg" name="term" value="{{request('term')}}" placeholder="검색">
                   <span class="input-group-btn">
                     <button class="btn btn-lg btn-default" type="submit">
                         <i class="fa fa-search"></i>
@@ -15,7 +15,7 @@
 
         <div class="widget">
             <div class="widget-heading">
-                <h4>Categories</h4>
+                <h4 class="text-center">카테고리</h4>
             </div>
             <div class="widget-body">
                 <ul class="categories">
@@ -32,7 +32,7 @@
 
         <div class="widget">
             <div class="widget-heading">
-                <h4>Popular Posts</h4>
+                <h4 class="text-center">인기 글</h4>
             </div>
             <div class="widget-body">
                 <ul class="popular-posts">
@@ -47,7 +47,7 @@
                         </div>
                         @endif
                         <div class="post-body">
-                            <h6><a href="{{route('blog.show',$post->slug)}}">{{$post->title}}</a></h6>
+                            <h6><a href="{{route('blog.show',$post->slug)}}">{{str_limit($post->title,50)}}</a></h6>
                             <div class="post-meta">
                                 <span>{{$post->created_at->diffForHumans()}}</span>
                             </div>
@@ -61,7 +61,7 @@
 
         <div class="widget">
             <div class="widget-heading">
-                <h4>Archives</h4>
+                <h4 class="text-center">Archives</h4>
             </div>
             <div class="widget-body">
                 <ul class="categories">
@@ -82,13 +82,16 @@
 
         <div class="widget">
             <div class="widget-heading">
-                <h4>Tags</h4>
+                <h4 class="text-center">태그</h4>
             </div>
             <div class="widget-body">
                 <ul class="tags">
                     @foreach($tags as $tag)
+                    @if(!empty($tag->name))
                     <li><a href="{{route('tag',$tag->slug)}}">{{$tag->name}}</a></li>
+                    @endif
                     @endforeach
+
                 </ul>
             </div>
         </div>

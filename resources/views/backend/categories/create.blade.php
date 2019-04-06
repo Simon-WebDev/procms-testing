@@ -1,18 +1,18 @@
 @extends('layouts.backend.main')
-@section('title', 'MyBlog | Category Create')
+@section('title')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="min-height: 323px;">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Category
-      <small>Add New Category</small>
+      <i class="fa fa-folder-open"></i> 카테고리
+      <small>작성</small>
     </h1>
     <ol class="breadcrumb">
-      <li class="active"><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Dashboard</li></a>
-      <li><a href="{{route('backend.categories.index')}}">Category</a></li>
-      <li class="active">New Category</li>
+      <li class="active"><a href="{{route('backend.home')}}"><i class="fa fa-dashboard"></i> Dashboard</li></a>
+      <li><a href="{{route('backend.categories.index')}}"><i class="fa fa-folder-open"></i>카테고리</a></li>
+      <li class="active">카테고리 작성</li>
     </ol>
   </section>
 
@@ -25,9 +25,7 @@
           'files'  => TRUE,
           'id' =>'category-form'
         ]) !!}
-        
         @include('backend.categories.form')
-
         {!! Form::close() !!}
       </div>
     <!-- ./row -->

@@ -101,7 +101,7 @@ class BlogController extends BackendController
         
         $newPost = $request->user()->posts()->create($data);
         $newPost->createTags($data["post_tags"]);
-        return redirect('backend/blog/')->with('message','새 블로그 글을 작성하셨습니다.');
+        return redirect('backend/blog/')->with('message',$newPost->title.' 제목으로 새 글을 작성하셨습니다.');
     }
 
     public function handleRequest($request)
@@ -109,7 +109,7 @@ class BlogController extends BackendController
         $data = $request->all();
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $fileName = str_random(6).time().'.'.$image->getClientOriginalExtension();
+            $fileName = time().'-'.str_random(6).'.'.$image->getClientOriginalExtension();
 
             $ext = substr(strrchr($fileName, '.'), 1);
             $thumbnail = str_replace(".{$ext}","_thumb.{$ext}", $fileName);
@@ -167,10 +167,10 @@ class BlogController extends BackendController
         $data = $this->handleRequest($request);
         $post->update($data);
         $post->createTags($data['post_tags']);
-        if ($oldImage !== $post->image) {
-            $this->removeImage($oldImage);
-        }
-        return redirect('backend/blog/')->with('message','블로그 글을 수정하셨습니다.');
+        // if ($oldImage !== $post->image) {
+        //     $this->removeImage($oldImage);
+        // }
+        return redirect('backend/blog/')->with('message',$post->title.'을(를) 수정하셨습니다.');
     }
 
     /**
@@ -189,7 +189,7 @@ class BlogController extends BackendController
     {   
         $post = Post::withTrashed()->findOrFail($id);
         $post->forceDelete();
-        $this->removeImage($post->image);
+        // $this->removeImage($post->image);
         return redirect('backend/blog?status=trash')->with('message','영구삭제 되었습니다.');
     }
 

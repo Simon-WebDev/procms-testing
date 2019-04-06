@@ -24,7 +24,7 @@ class CommentStoreRequest extends Request
     public function rules()
     {
         return [
-            'author_name'  => 'required',
+            'author_name'  => 'required:max:100',
             'author_email' => 'required|email',
             'body'         => 'required'
         ];

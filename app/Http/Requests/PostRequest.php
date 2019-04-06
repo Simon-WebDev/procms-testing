@@ -29,7 +29,7 @@ class PostRequest extends FormRequest
             'body'         => 'required',
             'published_at' => 'date_format:Y-m-d H:i:s|nullable',
             'category_id'  => 'required',
-            'image'        => 'mimes:jpeg,png,jpg,gif,svg|max:2000'
+            'image'        => 'mimes:jpeg,,jpg,png,gif,svg|max:6000'
         ];
         switch($this->method()){
             case 'PUT' :

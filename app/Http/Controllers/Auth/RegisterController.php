@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\Mail\NewUserWelcome;
+use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Validator;
+use Mail;
+use Session;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -27,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -50,7 +54,9 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
+            'site_agree' =>'required',
+            'privacy_agree' =>'required',
         ]);
     }
 
@@ -62,10 +68,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'site_agree' => $data['site_agree'],
+            'privacy_agree' => $data['privacy_agree'],
+            'slug'  => time().'-'.str_random(20),
+            'bio'  => $data['name']
         ]);
+        
+        Session::flash('info',$user->name.'님 회원가입 하셨습니다.');
+
+        /*added. new register welcome email*/
+        
+        Mail::to($user)->queue(new NewUserWelcome($user));
+        /*end*/
+        /*added. new user role subscriber*/
+        $user->attachRole('subscriber');
+        /*end*/
+
+        return $user;
+        
     }
 }

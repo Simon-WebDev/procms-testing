@@ -36,7 +36,8 @@ class Post extends Model
 
     public function commentsNumber($label = 'Comment')
     {
-        $commentsNumber = $this->comments->count();
+        //comment number excerpt is_active = 0
+        $commentsNumber = $this->comments()->where('is_active',1)->get()->count();
 
         return $commentsNumber . " " . str_plural($label, $commentsNumber);
     }
@@ -108,7 +109,7 @@ class Post extends Model
 
     public function dateFormatted($showTimes = false)
     {
-        $format = "d/m/Y";
+        $format = "Y/m/d";
         if ($showTimes) $format = $format . " H:i:s";
         return $this->created_at->format($format);
     }
@@ -196,12 +197,12 @@ class Post extends Model
     {
         $tags = explode(",", $tagString);
         $tagIds = [];
-
+        
         foreach ($tags as $tag) 
         {        
             $newTag = new Tag();
             $newTag = Tag::firstOrCreate(            
-                        ['slug' => str_slug($tag), 'name' => ucwords(trim($tag))]
+                        ['slug' => $tag, 'name' => ucwords(trim($tag))]
                     );  
             $newTag->save();  
 
@@ -216,6 +217,59 @@ class Post extends Model
     {
         return $this->tags->pluck('name');
     }
+
+    // public static function slugify($text)
+    // {
+    //   // replace non letter or digits by -
+    //   $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+    //   // transliterate
+    //   $text = iconv("EUC-KR","UTF-8//IGNORE", $text);
+
+    //   // remove unwanted characters
+    //   $text = preg_replace('~[^-\w]+~', '', $text);
+
+    //   // trim
+    //   $text = trim($text, '-');
+
+    //   // remove duplicate -
+    //   $text = preg_replace('~-+~', '-', $text);
+
+    //   // lowercase
+    //   $text = strtolower($text);
+
+    //   if (empty($text)) {
+    //     return 'n-a';
+    //   }
+
+    //   return $text;
+    // }
+
+    // function make_slug($string = null, $separator = "-") {
+    //     if (is_null($string)) {
+    //         return "";
+    //     }
+
+    //     // Remove spaces from the beginning and from the end of the string
+    //     $string = trim($string);
+
+    //     // Lower case everything 
+    //     // using mb_strtolower() function is important for non-Latin UTF-8 string | more info: http://goo.gl/QL2tzK
+    //     $string = mb_strtolower($string, "UTF-8");;
+
+    //     // Make alphanumeric (removes all other characters)
+    //     // this makes the string safe especially when used as a part of a URL
+    //     // this keeps latin characters and arabic charactrs as well
+    //     $string = preg_replace("/[^a-z0-9_\s-ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅎㅏㅑㅓㅕㅜㅠㅢ/u", "", $string);
+
+    //     // Remove multiple dashes or whitespaces
+    //     $string = preg_replace("/[\s-]+/", " ", $string);
+
+    //     // Convert whitespaces and underscore to the given separator
+    //     $string = preg_replace("/[\s_]/", $separator, $string);
+
+    //     return $string;
+    // }
 
 
 }

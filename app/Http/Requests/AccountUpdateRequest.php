@@ -28,7 +28,7 @@ class AccountUpdateRequest extends FormRequest
             'email'    => 'email|required|unique:users,email,' .auth()->user()->id,
             'password' => 'required_with:password_confirmation|confirmed',
             'role'     => 'required',
-            'slug'     => 'required|unique:users,slug,'.auth()->user()->id, 
+            // 'slug'     => 'required|unique:users,slug,'.auth()->user()->id, 
         ];
     }
 }

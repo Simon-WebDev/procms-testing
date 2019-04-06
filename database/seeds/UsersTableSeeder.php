@@ -24,7 +24,10 @@ class UsersTableSeeder extends Seeder
         	'email' => 'john@fake.com',
         	'password' => bcrypt('secret'),
             'slug' => $faker->slug,
-            'bio' => $faker->text(rand(250,300))
+            'bio' => $faker->text(rand(250,300)),
+            'created_at' => $faker->dateTimeThisYear(),
+            'site_agree' => 1,
+            'privacy_agree' => 1
             ],
 
         	[
@@ -32,7 +35,10 @@ class UsersTableSeeder extends Seeder
         	'email' => 'jane@fake.com',
         	'password' => bcrypt('secret'),
             'slug' => $faker->slug, 
-            'bio' => $faker->text(rand(250,300))
+            'bio' => $faker->text(rand(250,300)),
+            'created_at' => $faker->dateTimeThisYear(),
+            'site_agree' => 1,
+            'privacy_agree' => 1
             ],
 
         	[
@@ -40,7 +46,20 @@ class UsersTableSeeder extends Seeder
         	'email' => 'edo@fake.com',
         	'password' => bcrypt('secret'),
             'slug' => $faker->slug,
-            'bio' => $faker->text(rand(250,300))
+            'bio' => $faker->text(rand(250,300)),
+            'created_at' => $faker->dateTimeThisYear(),
+            'site_agree' => 1,
+            'privacy_agree' => 1
+            ],
+            [
+            'name' => 'Fake Man',
+            'email' => 'fake@fake.com',
+            'password' => bcrypt('secret'),
+            'slug' => $faker->slug,
+            'bio' => $faker->text(rand(250,300)),
+            'created_at' => $faker->dateTimeThisYear(),
+            'site_agree' => 1,
+            'privacy_agree' => 1
             ]
     	]);
     }

@@ -18,7 +18,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','slug','bio'
+        'name', 'email', 'password','slug','bio','site_agree','privacy_agree',
+        'provider', 'socialid', 'token'
     ];
 
     /**
@@ -27,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'socialid', 'token'
     ];
 
     public function posts()
@@ -42,15 +43,57 @@ class User extends Authenticatable
 
     public function getBioHtmlAttribute()
     {
-        return $this->bio ? Markdown::convertToHtml(e($this->bio)) : NULL ;
+        return $this->bio ? nl2br($this->bio) : NULL;
     }
 
+    //gravatar.com  if user signedup, possible
     public function gravatar()
     {
         $email = $this->email;
-        $default = '';
+        $default = "https://image.freepik.com/free-icon/profile-user_318-80283.jpg";
+        // $default = asset('images/customer.png');
+        // $default = "http://procms.devv/images/customer.png";
         $size = 40;
-        return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
-
+        return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . ( $default ) . "&s=" . $size;
     }
+    
+    // public function gravatar($value='')
+    // {
+    //     $imagePath = public_path() . "/images/" . 'customer.png';
+    //     if (file_exists($imagePath)) $imageUrl = asset("images/" . 'customer.png');
+    //     return $imageUrl;
+    // }
+
+
+
+    public function boards()
+    {
+        return $this->hasMany('App\Board');
+    }
+
+    public function answers()
+    {
+        return $this->hasMany('App\Answer');
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany('App\Reservation');
+    }
+
+    public function pages()
+    {
+        return $this->hasMany('App\Page');
+    }
+
+    public function dateFormatted($showTimes = false)
+    {
+        $format = "Y/m/d";
+        if($showTimes) $format = $format . " H:i:s";
+        return $this->created_at->format($format);
+    }
+
+  
+
+  
 }

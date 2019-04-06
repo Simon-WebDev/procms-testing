@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends BackendController
 {
+    
     /**
      * Display a listing of the resource.
      *

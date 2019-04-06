@@ -10,9 +10,9 @@ class Comment extends Model
     protected $fillable =[
     	'author_name',
     	'author_email',
-    	'author_url',
     	'body',
-    	'post_id'
+    	'post_id',
+        'is_active'
     ];
 
     public function post()
@@ -27,7 +27,14 @@ class Comment extends Model
 
     public function getBodyHtmlAttribute()
     {
-    	return Markdown::convertToHtml(e($this->body));
+    	return $this->body ? strip_tags(nl2br($this->body),'<br></br>') : NULL;
+    }
+
+    public function dateFormatted($showTimes = false)
+    {
+        $format = "Y/m/d";
+        if($showTimes) $format = $format . " H:i:s";
+        return $this->created_at->format($format);
     }
   
 

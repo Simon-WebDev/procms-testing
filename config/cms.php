@@ -2,13 +2,14 @@
 
 return [
 	'image' => [
-		'directory' => 'img',
+		'directory' => 'photos/shares',
 		'thumbnail' => [
-			'width' => 250,
-			'height' => 170
+			'width' => 300,
+			'height' =>300
 		]
 	],
-	'default_category_id' => 8,
+	'default_category_id' => 1,
 	'default_user_id' => 1,
+	'default_chapter_id' => 1,
 ];
 

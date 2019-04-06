@@ -1,22 +1,22 @@
 @extends('layouts.backend.main')
-@section('title', 'MyBlog | Users')
+@section('title')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="min-height: 323px;">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Users
-      <small>Display All Users</small>
+      <i class="fa fa-users"></i> 회원관리
+      <small>모든회원</small>
     </h1>
     <ol class="breadcrumb">
       <li class="active">
-        <a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
+        <a href="{{route('backend.home')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
       </li>
       <li>
-        <a href="{{route('backend.users.index')}}">Users</a>
+        <a href="{{route('backend.users.index')}}"><i class="fa fa-users"></i>회원관리</a>
       </li>
-      <li class="active">All Users</li>
+      <li class="active">모든 회원</li>
     </ol>
   </section>
 
@@ -27,21 +27,32 @@
           <div class="box">
           	<div class="box-header clearfix">
           		<div class="pull-left">
-                <a href="{{route('backend.users.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> Add New</a>
+                <a href="{{route('backend.users.create')}}" class="btn btn-success btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span>Add New</a>
+                <a href="{{route('backend.users.index')}}" class="btn btn-warning btn-labeled"><span class="btn-label"><i class="fa fa-list"></i></span>목록</a>
               </div>
               <div class="pull-right">
-               
+                <form action="{{route('backend.users.index')}}" role="search" class="form-inline">
+                    <div class="input-group">
+                        <input type="text" name="keyword" value="{{Request::get('keyword')}}" class="form-control input-sm" placeholder="검색" requried>
+                        <span class="input-group-btn"><button class="btn btn-default btn-sm" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        </span>
+                    </div>
+                </form>
               </div>
           	</div>
             <!-- /.box-header -->
             <div class="box-body ">
-              @include('backend.partials.message')
+              @include('backend.partials.message_posts')
             	@if(!$users->count())
-              	<div class="alert alert-danger">
-              		<strong>Users Not Found</strong>
-              	</div>
+              	<div class="alert alert-danger text-center">
+                  <strong>데이터가 없습니다.</strong> <a href="{{URL::previous()}}" class="btn btn-sm bg-navy m-l-20" style="display: inline-block;"><i class="fa fa-rotate-left"></i> 뒤로</a>
+                </div>
             	@else
+                   <div class="table-responsive">
                    @include('backend.users.table')
+                   </div>
               @endif    
             </div>
             <!-- /.box-body -->
@@ -51,7 +62,7 @@
             	</div>
             	<div class="pull-right">
             		
-            		<small>{{$usersCount}} {{str_plural('item',$usersCount)}}</small>
+            		<small>{{$usersCount}} {{str_plural('User',$usersCount)}}</small>
             	</div>
             	
             </div>
@@ -68,8 +79,4 @@
 @endsection
 
 
-@section('script')
-<script>
-	$('ul.pagination').addClass('no-margin pagination-sm');
-</script>
-@endsection
+

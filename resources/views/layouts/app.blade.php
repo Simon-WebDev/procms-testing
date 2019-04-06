@@ -14,15 +14,16 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
    
     <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="backend/css/bootstrap.min.css">
-    <!-- Font Awesome -->
+{{--     <link rel="stylesheet" href="backend/css/bootstrap.min.css">
+ --}}    <!-- Font Awesome -->
     <link rel="stylesheet" href="backend/plugins/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+   {{--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"> --}}
     <!-- Theme style -->
-    <link rel="stylesheet" href="backend/css/AdminLTE.css">
+   {{--  <link rel="stylesheet" href="backend/css/AdminLTE.css"> --}}
     <!-- iCheck -->
-    <link rel="stylesheet" href="backend/plugins/iCheck/square/blue.css">
+   {{--  <link rel="stylesheet" href="backend/plugins/iCheck/square/blue.css"> --}}
+   <link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}">
 </head>
 <body class="hold-transition login-page">
     <div id="app">

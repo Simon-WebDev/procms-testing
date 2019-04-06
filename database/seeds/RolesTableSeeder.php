@@ -33,6 +33,12 @@ class RolesTableSeeder extends Seeder
        $author->display_name = "Author";
        $author->save();
 
+       //create Author Role
+       $subscriber = new Role();
+       $subscriber->name = 'subscriber';
+       $subscriber->display_name = "Subscriber";
+       $subscriber->save();
+
        //Attach the role
        //first user as admin
        $user1 = User::find(1);
@@ -45,5 +51,9 @@ class RolesTableSeeder extends Seeder
        //third user as author
        $user3 = User::find(3);
        $user3->attachRole($author);
+
+       //fourth user as subscriber
+       $user4 = User::find(4);
+       $user4->attachRole($subscriber);
     }
 }

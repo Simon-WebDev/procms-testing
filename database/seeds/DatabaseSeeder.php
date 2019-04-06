@@ -18,6 +18,13 @@ class DatabaseSeeder extends Seeder
          $this->call(PermissionsTableSeeder::class);
          $this->call(TagsTableSeeder::class);
          $this->call(CommentsTableSeeder::class);
+         $this->call(GroupsTableSeeder::class);
+         $this->call(BoardsTableSeeder::class);
+         $this->call(SettingsTableSeeder::class);
+         $this->call(ChaptersTableSeeder::class);
+         $this->call(PagesTableSeeder::class);
+         $this->call(StaffsTableSeeder::class);
+
 
     }
 }

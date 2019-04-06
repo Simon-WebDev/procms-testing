@@ -1,20 +1,20 @@
 @extends('layouts.backend.main')
-@section('title', 'MyBlog | Blog index')
+@section('title')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="min-height: 323px;">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Media
-      <small>Display All Media</small>
+      <i class="fa fa-image"></i> 파일관리
+      <small>관리</small>
     </h1>
     <ol class="breadcrumb">
       <li class="active">
-        <a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
+        <a href="{{route('backend.home')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
       </li>
-      <li><a href="{{route('backend.media.index')}}">Media</a></li>
-      <li class="active">All Media</li>
+      <li><a href="{{route('backend.media.index')}}"><i class="fa fa-image"></i>파일관리</a></li>
+      <li class="active">관리</li>
     </ol>
   </section>
 

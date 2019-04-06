@@ -12,14 +12,20 @@ use Illuminate\Http\Request;
 
 class UsersController extends BackendController
 {
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users      = User::orderBy('name')->paginate($this->limit);
+        $users = User::where(function($query) use($request){
+            if ($keyword = $request->get('keyword')) {
+               $query->where('name','LIKE','%'.$keyword.'%')
+               ->orWhere('email','LIKE','%'.$keyword.'%');
+            }
+        })->orderBy('created_at','desc')->paginate($this->limit);
         $usersCount = User::count();
 
         return view("backend.users.index", compact('users', 'usersCount'));
@@ -47,11 +53,15 @@ class UsersController extends BackendController
        
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
-        
+
+        $data['site_agree'] = 1;
+        $data['privacy_agree'] = 1;
+        $data['slug'] = time().'-'.str_random(20);
+
         $user = User::create($data);
         $user->attachRole($request->role);
 
-        return redirect("/backend/users")->with("message", "New user was created successfully!");
+        return redirect("/backend/users")->with("message", "새 회원이 생성되었습니다!");
     }
 
     /**
@@ -105,7 +115,7 @@ class UsersController extends BackendController
         $user->detachRoles();
         $user->attachRole($request->role);
 
-        return redirect("/backend/users")->with("message", "User was updated successfully!");
+        return redirect("/backend/users")->with("message", "수정되었습니다!");
     }
 
     /**
@@ -124,21 +134,29 @@ class UsersController extends BackendController
         if ($deleteOption == "delete") {
             // delete user posts
             $user->posts()->withTrashed()->forceDelete();
+            $user->pages()->withTrashed()->forceDelete();
         }
         elseif ($deleteOption == "attribute") {
             $user->posts()->update(['author_id' => $selectedUser]);
+            $user->pages()->update(['user_id' => $selectedUser]);
         }
 
         $user->delete();
 
-        return redirect("/backend/users")->with("message", "User was deleted successfully!");
+        return redirect("/backend/users")->with("message", "회원을 삭제하였습니다!");
     }
 
     public function confirm(UserDestroyRequest $request, $id)
     {
         $user = User::findOrFail($id);
-        $users = User::where('id', '!=', $user->id)->pluck('name', 'id');
 
+        // $users = User::where('id', '!=', $user->id)->pluck('name', 'id');
+        $users1 = User::whereRoleIs('admin')->get();
+        $users2 = User::whereRoleIs('editor')->get();
+        $users3 = User::whereRoleIs('author')->get();
+        $staff_users = $users1->merge($users2)->merge($users3);
+        $users = $staff_users->where('id', '!=', $user->id)->pluck('name', 'id');
+        
         return view("backend.users.confirm", compact('user', 'users'));
     }
 }
